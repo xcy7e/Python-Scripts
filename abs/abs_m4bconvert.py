@@ -1,5 +1,5 @@
 #
-# Script to log into ABS using selenium
+# Script to log into ABS using selenium and click the m4b convert button for a single book
 #
 
 # USAGE:
