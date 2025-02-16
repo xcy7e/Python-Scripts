@@ -5,6 +5,8 @@
 - a txt-file with LibraryItemIds (one ID per line, dashes yes; but no quotes whatsoever)
  
 ### HOW TO USE
+The bash-scripts are only there to control automatism for the python script. You may just need the python script for your own setup, actually.
+
 1. Configure your custom values and paths in all scripts (you might want to edit the m4b-convert-button text in the .py-file according to your language!)
 2. Create a txt-file with all libraryItemIds (you can retrieve them from an abs-backup sqlite-file
 3. Start `m4b_convert_mgr.sh` (e.g. from a cronjob)
