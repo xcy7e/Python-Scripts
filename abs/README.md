@@ -24,4 +24,4 @@ In the night, there is time for the ABS Backup at 01:30 to avoid any interruptio
 
 **Use at YOUR OWN RISK!**
 
-If the M4B converting works but result in invalid files, you May habe no Backup mp3's if you automatically clear the metadata as set up in the examples.
+If the M4B converting works but result in invalid files, you may have no backup mp3's if you automatically clear the metadata as set up in the examples.
