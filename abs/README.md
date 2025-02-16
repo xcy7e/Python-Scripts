@@ -2,7 +2,7 @@
 ### Requirements:
 - bash
 - python
-- a txt-file with LibraryItemIds
+- a txt-file with LibraryItemIds (one ID per line, no quotes whatsoever)
  
 ### HOW TO USE
 1. Configure your custom values in both scripts (you might want to edit the m4b-convert-button text in the .py-file according to your language!)
