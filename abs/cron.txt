@@ -1,0 +1,11 @@
+#######################################################################################################
+# ABS - automatic m4b-converting (03:00 - 12:45) & (14:00 - 23:45)
+*/15 3-12 * * * root /myscripts/m4b_convert_mgr.sh >> /var/log/autoM4bConvert.log
+*/15 14-23 * * * root /myscripts/m4b_convert_mgr.sh >> /var/log/autoM4bConvert.log
+
+# >>> Auto-Backup um 01:30 - ~02:00
+
+# Clear metadata (01:15) & (13:55)
+15 1 * * * root /myscripts/auto_clear_metadata.sh >> /var/log/autoM4bConvert.log
+55 13 * * * root /myscripts/auto_clear_metadata.sh >> /var/log/autoM4bConvert.log
+#######################################################################################################
