@@ -44,7 +44,8 @@ print("logging in")
 WebDriverWait(browser, 15).until(EC.url_changes(url))
 
 # 2. M4B Convert
-new_url = abs_host'/audiobook/'+bookId+'/manage?tool=m4b'
+new_url = abs_host+'/audiobook/'+bookId+'/manage?tool=m4b'
+print(browser.current_url)
 assert browser.current_url == new_url
 assert 'Audiobookshelf' in browser.title
 
@@ -60,4 +61,5 @@ time.sleep(10)  # Wait 10 seconds
 
 print("finish")
 browser.quit()
+
 
