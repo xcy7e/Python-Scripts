@@ -1,7 +1,7 @@
 ## AUTOMATIC M4B-CONVERTING USING ABS BUILTIN TOOLS
 ### Requirements:
 - bash
-- python
+- python (with selenium & headless geckodriver)
 - a txt-file with LibraryItemIds (one ID per line, dashes yes; but no quotes whatsoever)
  
 ### HOW TO USE
