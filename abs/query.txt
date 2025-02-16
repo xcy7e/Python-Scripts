@@ -1,0 +1,7 @@
+# Get all "Hörbuch"-Audiobooks orderd by length/mp3-count descending
+SELECT i.id FROM books AS b
+LEFT JOIN libraryItems AS i ON i.mediaId = b.id
+WHERE 
+b.genres = '["Hörbuch"]'
+AND b.audioFiles LIKE "%mp3%"
+ORDER BY b.duration DESC, LENGTH(b.audioFiles) DESC;
