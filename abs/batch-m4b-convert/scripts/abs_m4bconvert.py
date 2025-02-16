@@ -20,56 +20,58 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-opt = FirefoxOptions()
-opt.add_argument("--headless")
-browser = webdriver.Firefox(options=opt)
 
-bookId = sys.argv[1]
-print("Start session for book {"+bookId+"}")
+try:
+    opt = FirefoxOptions()
+    opt.add_argument("--headless")
+    browser = webdriver.Firefox(options=opt)
 
-# 1. Login
-url=abs_host+"/login/?redirect=%2Faudiobook%2F"+bookId+"%2Fmanage%3Ftool%3Dm4b"
-browser.get(url)
-assert 'Audiobookshelf' in browser.title
+    bookId = sys.argv[1]
+    print("Start session for book {"+bookId+"}")
 
-wait = WebDriverWait(browser, 5)
-input_element = wait.until(EC.presence_of_element_located((By.NAME, 'username')))
-usernameInput = browser.find_element(By.NAME, value='username')  # Find username input
-passwordInput = browser.find_element(By.NAME, value='password')  # Find password input
-usernameInput.send_keys(abs_username)
-passwordInput.send_keys(abs_password + Keys.RETURN)
-browser.find_element(By.XPATH, '//form').submit()
+    # 1. Login
+    url=abs_host+"/login/?redirect=%2Faudiobook%2F"+bookId+"%2Fmanage%3Ftool%3Dm4b"
+    browser.get(url)
+    assert 'Audiobookshelf' in browser.title
 
-print("logging in")
-WebDriverWait(browser, 15).until(EC.url_changes(url))
+    wait = WebDriverWait(browser, 5)
+    input_element = wait.until(EC.presence_of_element_located((By.NAME, 'username')))
+    usernameInput = browser.find_element(By.NAME, value='username')  # Find username input
+    passwordInput = browser.find_element(By.NAME, value='password')  # Find password input
+    usernameInput.send_keys(abs_username)
+    passwordInput.send_keys(abs_password + Keys.RETURN)
+    browser.find_element(By.XPATH, '//form').submit()
 
-# 2. M4B Convert
-new_url = abs_host+'/audiobook/'+bookId+'/manage?tool=m4b'
-embed_url = abs_host+'/audiobook/'+bookId+'/manage?tool=embed'
-print(browser.current_url)
+    print("logging in")
+    WebDriverWait(browser, 15).until(EC.url_changes(url))
 
-if browser.current_url != new_url:
-    if browser.current_url == embed_url:
-        print("Book is already converted to m4b. Exit.")
-        sys.exit()
-    else:
-        print("Unknown redirection to ["+browser.current_url+"]. Exit.")
-        sys.exit()
+    # 2. M4B Convert
+    new_url = abs_host+'/audiobook/'+bookId+'/manage?tool=m4b'
+    embed_url = abs_host+'/audiobook/'+bookId+'/manage?tool=embed'
+    print(browser.current_url)
 
-assert 'Audiobookshelf' in browser.title
+    if browser.current_url != new_url:
+        if browser.current_url == embed_url:
+            raise Exception("Book is already converted to m4b. Exit.")
+        else:
+            raise Exception("Unknown redirection to ["+browser.current_url+"]. Exit.")
 
-print("Convert-Page loaded")
-m4bBtn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[text()='"+abs_convert_btn_text+"']")))
-print("Convert-Button found")
+    assert 'Audiobookshelf' in browser.title
 
-print("Start converting")
-m4bBtn.click()
+    print("Convert-Page loaded")
+    m4bBtn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[text()='"+abs_convert_btn_text+"']")))
+    print("Convert-Button found")
 
-print("Converting started!")
+    print("Start converting")
+    m4bBtn.click()
+    print("Converting started!")
 
-time.sleep(10)  # Wait 10 seconds
-
-print("finish")
-browser.quit()
-
+    time.sleep(10)  # Wait 10 seconds
+    print("finish")
+except AssertionError as ae:
+    print("Assertion failed:", ae)
+except Exception as error:
+    print("Error:", error)
+finally:
+    browser.quit()
 

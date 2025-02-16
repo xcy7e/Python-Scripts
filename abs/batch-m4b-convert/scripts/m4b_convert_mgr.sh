@@ -12,7 +12,7 @@
 
 
 ID_FILE="ids.txt"	# path to txt-file with libraryItemIds
-IDS_LEFT=$(wc -l "$ID_FILE")
+IDS_LEFT=$(wc -l < "$ID_FILE")
 if [ "$IDS_LEFT" -lt "1" ];then
     echo -e "\e[91mAll IDs processed."
     return
