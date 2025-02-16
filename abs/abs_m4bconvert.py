@@ -45,8 +45,17 @@ WebDriverWait(browser, 15).until(EC.url_changes(url))
 
 # 2. M4B Convert
 new_url = abs_host+'/audiobook/'+bookId+'/manage?tool=m4b'
+embed_url = abs_host+'/audiobook/'+bookId+'/manage?tool=embed'
 print(browser.current_url)
-assert browser.current_url == new_url
+
+if browser.current_url != new_url:
+    if browser.current_url == embed_url:
+        print("Book is already converted to m4b. Exit.")
+        sys.exit()
+    else:
+        print("Unknown redirection to ["+browser.current_url+"]. Exit.")
+        sys.exit()
+
 assert 'Audiobookshelf' in browser.title
 
 print("Convert-Page loaded")
@@ -55,6 +64,7 @@ print("Convert-Button found")
 
 print("Start converting")
 m4bBtn.click()
+
 print("Converting started!")
 
 time.sleep(10)  # Wait 10 seconds
