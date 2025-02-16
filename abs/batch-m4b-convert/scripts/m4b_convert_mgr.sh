@@ -54,9 +54,7 @@ if [ "$USED_CPUS" -lt "$MAX_PROCS" ]; then
         start_m4bconvert
     else
         echo "Not enough disk space ($FREE_SPACE_BYTES bytes left) ($MIN_FREESPACE_BYTES bytes minimum)"
-        return
     fi
 else
     echo "Max processes reached. ($USED_CPUS/$MAX_PROCS)"
-    return
 fi
