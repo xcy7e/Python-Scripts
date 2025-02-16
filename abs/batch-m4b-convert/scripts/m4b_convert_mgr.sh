@@ -1,15 +1,15 @@
 #!/bin/bash
-
 # Starts m4b-converting py-script if enough CPUs are free
-
 # USAGE:
-#
 # Test-Mode (keeps IDs in txt-file):
 # ./m4b_convert_mgr.sh 1
 #
 # Regular-Mode:
 # ./m4b_convert_mgr.sh
 
+# Print datetime for the cronjob log
+current_date_time="`date "+%Y-%m-%d %H:%M:%S"`";
+echo -en "\n------------------------------------------------------------------\n$current_date_time\n"
 
 ID_FILE="ids.txt"	# path to txt-file with libraryItemIds
 IDS_LEFT=$(wc -l "$ID_FILE")
@@ -23,16 +23,13 @@ MAX_PROCS=7
 # Keep min 5-7GB free space on abs metadata drive
 MIN_FREESPACE_BYTES=7120000000
 
-
 USED_CPUS=$(ps -ef | grep ffmpeg | wc -l)
 USED_CPUS=$((USED_CPUS-1))
 FREE_SPACE_BYTES=$(df -khB1 /usr/share/audiobookshelf/metadata | tail -n1 | awk '{print $4}')
-
 TEST_MODE="$1"
 
 function start_m4bconvert () {
     echo "Start converting:"
-
     # Get libraryItemId from txt-file
     LIBI_ID=$(head -n 1 "$ID_FILE")
 
@@ -49,11 +46,6 @@ function start_m4bconvert () {
     echo -e "\e[1mJob done!\e[0m"
     return
 }
-
-# Print datetime for the cronjob log
-current_date_time="`date "+%Y-%m-%d %H:%M:%S"`";
-echo -en "\n------------------------------------------------------------------\n$current_date_time\n"
-
 
 # Check free CPUs
 if [ "$USED_CPUS" -lt "$MAX_PROCS" ]; then
