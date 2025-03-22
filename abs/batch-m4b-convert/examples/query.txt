@@ -1,4 +1,4 @@
-# Get all "Hörbuch"-Audiobooks orderd by length/mp3-count descending
+/* Get all "Hörbuch"-Audiobooks orderd by length/mp3-count descending */
 SELECT i.id FROM books AS b
 LEFT JOIN libraryItems AS i ON i.mediaId = b.id
 WHERE 
