@@ -1,7 +1,7 @@
-## Automatic batch m4b-converting using builtin ABS-tools
-[This script](https://github.com/xcy7e/Python-Scripts/blob/master/abs/batch-m4b-convert/scripts/abs_m4bconvert.py) start m4b-convert for a single audiobook through ABS GUI using selenium. The bash scripts simply control the process and built a cycle flow to process a batch of audiobooks.
+## Automatically convert all audiobooks to m4b using builtin ABS-tools
+[This script](https://github.com/xcy7e/Python-Scripts/blob/master/abs/batch-m4b-convert/scripts/abs_m4bconvert.py) starts an m4b-conversion for a single audiobook through the Audiobookshelf's Webinterface using *selenium*. The shell scripts on the other hand simply control the processes and build a "cycle flow" to process all audiobooks chosen for m4b-Convert.
 
-### Requirements:
+### Requirements
 - bash
 - python (with selenium & geckodriver for headless firefox)
 - a txt-file with LibraryItemIds (one ID per line, dashes yes; but no quotes whatsoever)
